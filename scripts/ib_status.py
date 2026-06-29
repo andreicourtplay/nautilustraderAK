@@ -31,6 +31,12 @@ def parser() -> argparse.ArgumentParser:
 
 
 def value(obj: Any, *names: str, default: str = "") -> str:
+    if isinstance(obj, dict):
+        for name in names:
+            raw = obj.get(name)
+            if raw is not None:
+                return str(raw)
+        return default
     for name in names:
         if hasattr(obj, name):
             raw = getattr(obj, name)
@@ -48,9 +54,12 @@ def iter_collection(collection: Any) -> list[Any]:
 
 
 def describe_position(position: Any) -> str:
-    instrument = value(position, "instrument_id", "instrument", "symbol", default="?")
+    contract = getattr(position, "contract", None)
+    instrument = value(contract, "symbol", "localSymbol", default="")
+    if not instrument:
+        instrument = value(position, "instrument_id", "instrument", "symbol", default="?")
     qty = value(position, "quantity", "qty", "signed_qty", default="?")
-    avg_px = value(position, "avg_px_open", "avg_px", "average_cost", default="?")
+    avg_px = value(position, "avg_px_open", "avg_px", "avg_cost", "average_cost", default="?")
     return f"{instrument} qty={qty} avg_px={avg_px}"
 
 
@@ -64,10 +73,14 @@ def describe_order(order: Any) -> str:
 
 
 def describe_execution(execution: Any) -> str:
-    instrument = value(execution, "instrument_id", "symbol", "contract", default="?")
-    side = value(execution, "side", "action", default="?")
-    qty = value(execution, "quantity", "shares", "qty", default="?")
-    price = value(execution, "price", "avg_price", "avgPrice", default="?")
+    contract = execution.get("contract") if isinstance(execution, dict) else getattr(execution, "contract", None)
+    execution_details = execution.get("execution") if isinstance(execution, dict) else execution
+    instrument = value(contract, "symbol", "localSymbol", default="")
+    if not instrument:
+        instrument = value(execution, "instrument_id", "symbol", default="?")
+    side = value(execution_details, "side", "action", default="?")
+    qty = value(execution_details, "shares", "quantity", "qty", default="?")
+    price = value(execution_details, "price", "avg_price", "avgPrice", default="?")
     return f"{instrument} {side} qty={qty} price={price}"
 
 
