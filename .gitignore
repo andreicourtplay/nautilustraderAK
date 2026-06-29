@@ -1,0 +1,15 @@
+.env
+.env.local
+.env.*.local
+.venv/
+.uv-cache/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+data/*
+logs/*
+!data/.gitkeep
+!logs/.gitkeep
+tmp/
+assets/screenshots/
