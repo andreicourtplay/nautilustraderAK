@@ -12,6 +12,7 @@ LOG_DIR = PROJECT_ROOT / "logs"
 ORDERS_LOG = LOG_DIR / "orders.csv"
 EXECUTIONS_LOG = LOG_DIR / "executions.csv"
 CONNECTION_LOG = LOG_DIR / "connection_checks.log"
+STRATEGY_LOG = LOG_DIR / "strategy_decisions.csv"
 
 
 def utc_now() -> str:
@@ -65,6 +66,27 @@ def log_execution_summary(**row: Any) -> None:
             "open_orders",
             "executions_today",
             "message",
+        ],
+        {"timestamp_utc": utc_now(), **row},
+    )
+
+
+def log_strategy_decision(**row: Any) -> None:
+    append_csv(
+        STRATEGY_LOG,
+        [
+            "timestamp_utc",
+            "strategy",
+            "mode",
+            "account",
+            "client_id",
+            "symbol",
+            "side",
+            "quantity",
+            "decision",
+            "reason",
+            "current_position",
+            "open_orders",
         ],
         {"timestamp_utc": utc_now(), **row},
     )

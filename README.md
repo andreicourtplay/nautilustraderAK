@@ -87,3 +87,31 @@ Local runtime logs are written under `logs/`:
 - `logs/executions.csv`
 
 The real log files are ignored by Git.
+
+## First controlled strategy
+
+The first strategy checks one symbol and decides:
+
+- if there is already a position, skip;
+- if there are open orders, skip;
+- otherwise create a small order request.
+
+By default it sends `whatIf` only:
+
+```bash
+UV_CACHE_DIR=.uv-cache /opt/homebrew/bin/uv run python scripts/run_minimal_strategy.py
+```
+
+To test a different allowed symbol:
+
+```bash
+UV_CACHE_DIR=.uv-cache /opt/homebrew/bin/uv run python scripts/run_minimal_strategy.py --symbol IBKR
+```
+
+To actually transmit a paper order, both flags are required:
+
+```bash
+UV_CACHE_DIR=.uv-cache /opt/homebrew/bin/uv run python scripts/run_minimal_strategy.py --symbol IBKR --submit-paper-order --confirm-paper-trade
+```
+
+Do not use submit flags until the `whatIf` path and logs look correct.
