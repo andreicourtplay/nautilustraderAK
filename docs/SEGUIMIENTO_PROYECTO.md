@@ -17,8 +17,8 @@ Este documento es el checklist local de seguimiento del proyecto. La idea es usa
 - [x] Ramas creadas y subidas: `main`, `dev/andrei`, `dev/fran`.
 - [x] Rama activa de trabajo para Andrei: `dev/andrei`.
 - [x] Primer flujo de estrategia minima creado y probado en modo seguro.
-- [ ] Backtest minimo preparado.
-- [ ] Sistema de resultados/backtests creado.
+- [x] Backtest minimo preparado.
+- [x] Sistema de resultados/backtests creado.
 - [ ] Estrategia real de prueba definida.
 - [ ] Revision con Fran del flujo de trabajo desde su ordenador.
 
@@ -102,6 +102,7 @@ Este documento es el checklist local de seguimiento del proyecto. La idea es usa
 - [x] `README.md`.
 - [x] `docs/COLLABORATION.md`.
 - [x] `docs/STRATEGY_WORKFLOW.md`.
+- [x] `docs/BACKTEST_WORKFLOW.md`.
 - [x] `docs/manual_basico_tws.docx`.
 - [x] `docs/plan_global_nautilus_ibkr.docx`.
 - [x] `docs/SEGUIMIENTO_PROYECTO.md`.
@@ -119,6 +120,18 @@ Este documento es el checklist local de seguimiento del proyecto. La idea es usa
 - [x] Probar con `IBKR`: resultado esperado `ORDER` en modo `whatIf`.
 - [x] Confirmar que `IBKR whatIf` no deja orden abierta ni posicion nueva.
 
+### Backtest minimo
+
+- [x] Crear `backtests/minimal_backtest.py`.
+- [x] Crear `scripts/run_sample_backtest.py`.
+- [x] Crear muestra de precios `data/samples/ibkr_daily_sample.csv`.
+- [x] Crear carpeta local de resultados `data/backtests/`.
+- [x] Guardar resumen en `summary.json`.
+- [x] Guardar operaciones en `trades.csv`.
+- [x] Guardar decisiones en `decisions.csv`.
+- [x] Medir trades, P&L, win rate, drawdown, posicion final y equity final.
+- [x] Confirmar que resultados generados quedan ignorados por Git.
+
 ## Pendiente por bloques
 
 ### Bloque 1 - Limpieza y control de proyecto
@@ -133,19 +146,19 @@ Este documento es el checklist local de seguimiento del proyecto. La idea es usa
 
 ### Bloque 2 - Backtest minimo
 
-- [ ] Definir fuente de datos historicos.
-- [ ] Decidir si el primer backtest usa datos descargados o datos mock.
-- [ ] Crear carpeta de resultados de backtest.
-- [ ] Crear script de backtest minimo.
-- [ ] Guardar resultado en CSV/JSON.
-- [ ] Medir al menos:
-  - [ ] numero de trades.
-  - [ ] P&L aproximado.
-  - [ ] win rate.
-  - [ ] drawdown simple.
-  - [ ] posicion final.
-- [ ] Documentar como ejecutar el backtest.
-- [ ] Subir backtest base a `main`, `dev/andrei` y `dev/fran` cuando este verificado.
+- [x] Definir fuente de datos historicos.
+- [x] Decidir si el primer backtest usa datos descargados o datos mock.
+- [x] Crear carpeta de resultados de backtest.
+- [x] Crear script de backtest minimo.
+- [x] Guardar resultado en CSV/JSON.
+- [x] Medir al menos:
+  - [x] numero de trades.
+  - [x] P&L aproximado.
+  - [x] win rate.
+  - [x] drawdown simple.
+  - [x] posicion final.
+- [x] Documentar como ejecutar el backtest.
+- [x] Subir backtest base a `main`, `dev/andrei` y `dev/fran` cuando este verificado.
 
 ### Bloque 3 - Datos de mercado
 
@@ -274,13 +287,13 @@ UV_CACHE_DIR=.uv-cache /opt/homebrew/bin/uv run python scripts/run_minimal_strat
 
 ## Proximo paso recomendado
 
-El siguiente paso tecnico recomendado es el backtest minimo:
+El siguiente paso tecnico recomendado es datos de mercado e historicos reales:
 
-- [ ] Crear script de backtest simple.
-- [ ] Usar datos mock o historicos controlados.
-- [ ] Guardar resultados en `data/backtests/` o `logs/backtests/`.
-- [ ] Documentar el resultado.
-- [ ] No avanzar a mas paper trading automatico hasta que este bloque exista.
+- [ ] Confirmar permisos de datos IBKR paper para los simbolos elegidos.
+- [ ] Crear script de ultimo precio / bid / ask.
+- [ ] Crear script de barras historicas o importar un CSV historico real.
+- [ ] Ejecutar el backtest con datos no mock.
+- [ ] Comparar resultados antes de nuevas ordenes paper automaticas.
 
 ## Historial de hitos
 
@@ -293,3 +306,4 @@ El siguiente paso tecnico recomendado es el backtest minimo:
 - [x] 2026-06-29: seguridad paper-only, logs y comando de estado creados.
 - [x] 2026-06-29: estrategia minima creada y probada en `whatIf`.
 - [x] 2026-06-30: checklist local de seguimiento creado.
+- [x] 2026-06-30: backtest minimo offline creado y probado con datos de ejemplo.

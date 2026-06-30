@@ -115,3 +115,16 @@ UV_CACHE_DIR=.uv-cache /opt/homebrew/bin/uv run python scripts/run_minimal_strat
 ```
 
 Do not use submit flags until the `whatIf` path and logs look correct.
+
+## Minimal backtest
+
+Run the offline sample backtest:
+
+```bash
+UV_CACHE_DIR=.uv-cache /opt/homebrew/bin/uv run python scripts/run_sample_backtest.py
+```
+
+It reads `data/samples/ibkr_daily_sample.csv` and writes local results to
+`data/backtests/latest/`.
+
+See [docs/BACKTEST_WORKFLOW.md](docs/BACKTEST_WORKFLOW.md).

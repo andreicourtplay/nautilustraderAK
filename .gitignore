@@ -10,6 +10,11 @@ __pycache__/
 data/*
 logs/*
 !data/.gitkeep
+!data/backtests/
+data/backtests/*
+!data/backtests/.gitkeep
+!data/samples/
+!data/samples/**
 !logs/.gitkeep
 tmp/
 assets/screenshots/
